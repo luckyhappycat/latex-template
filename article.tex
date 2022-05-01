@@ -1,0 +1,168 @@
+%!TEX program = xelatex
+\documentclass[10pt,onecolumn,a4paper]{article}
+\usepackage{ctex} % 支持中文
+\usepackage{enumerate} % 项目编号
+%\usepackage{enumitem}
+\usepackage{geometry} % 设置页边距
+\geometry{left = 2.2cm, right=2.2cm, top = 2.5cm, bottom=2.5cm}
+\usepackage{amssymb} % symbol
+\usepackage{amsthm} % proof
+%\usepackage{courier} % 代码字体
+\usepackage{graphicx,subfigure} % figures
+\usepackage{xcolor,mdframed} % mdframed
+\usepackage{amsmath}
+\usepackage{fancyhdr} % 添加页眉页脚
+\usepackage{titlesec}
+\titleformat*{\section}{\centering\bf\large} %设置章节字体
+\usepackage{indentfirst} % 首行缩进
+\setlength{\parindent}{2em} % 设置首行缩进两字符
+\usepackage{breqn}
+\renewcommand\d{\mathop{}\!\mathrm{d}}
+\usepackage{multirow}
+
+\newtheorem{theorem}{Theorem}
+\renewcommand{\proofname}{\emph{\textbf{Proof}}}
+%\definecolor{mycolor}{RGB}{200,200,200}
+\definecolor{mycolor}{RGB}{192,192,192} % 设置代码阴影
+
+\cfoot{\thepage}
+
+% 代码
+%\usepackage{listings}
+\usepackage{fontspec}
+\setmonofont[Mapping={}]{DejaVu Sans Mono} %英文引号之类的正常显示，相当于设置英文字体，windows下用Consolas字体，Linux下用DejaVu Sans Mono字体
+%\setmonofont[Mapping={}]{Consolas} %英文引号之类的正常显示，相当于设置英文字体
+\setmonofont{DejaVu Sans Mono}
+%\setsansfont{Consolas} %设置英文字体 Monaco, Consolas,  Fantasque Sans Mono，Linux下用DejaVu Sans Mono字体
+%\setmainfont{Consolas} %设置文章主体部分的英文字体
+
+\setcounter{tocdepth}{2} % 设置目录深度
+
+\begin{document}
+\title{文档标题}
+\author{作者}
+%\today
+\maketitle % 显示文档标题 作者 时间
+
+\tableofcontents % 生成标题目录
+%\listoftables % 生成表格目录
+%\listoffigures % 生成图片目录
+%\clearpage
+%\newpage % 换页
+
+
+\section{第一章标题}
+\subsection{第一章第一节标题}
+一级标题和二级标题：
+\begin{mdframed}[backgroundcolor=mycolor,hidealllines=true]
+\begin{verbatim}
+\section{} 表示一级标题，自动对标题进行编号
+\section*{} 表示一级标题，不对标题进行编号
+\subsection{} 表示二级标题，自动对标题进行编号
+\subsection*{} 表示二级标题，不对标题进行编号
+\end{verbatim}
+\end{mdframed}
+
+书写代码的环境，设置背景颜色为黑色，不显示行号：
+\begin{mdframed}[backgroundcolor=mycolor,hidealllines=true]
+\begin{verbatim}
+\ begin{mdframed}[backgroundcolor=mycolor,hidealllines=true]
+\ begin{verbatim}
+代码内容
+\ end{verbatim}
+\ end{mdframed}
+%注意这里为了避免歧义，在反斜杠\后加了空格
+\end{verbatim}
+\end{mdframed}
+
+插入图片：
+\begin{mdframed}[backgroundcolor=mycolor,hidealllines=true]
+\begin{verbatim}
+\begin{figure}
+  \centering % 设置图片居中显示
+  \includegraphics[width=5in]{./当前目录下的图片如pic.jpg} % 设置了图片宽度
+  \caption{图片标题用于在图片下显示}\label{图片标签用于引用}
+\end{figure}
+\end{verbatim}
+\end{mdframed}
+
+默认使用首行缩进，如果不希望缩进，那么需要使用：
+\begin{mdframed}[backgroundcolor=mycolor,hidealllines=true]
+\begin{verbatim}
+\noindent
+\end{verbatim}
+\end{mdframed}
+
+项目编号，默认起始编号为1.
+\begin{mdframed}[backgroundcolor=mycolor,hidealllines=true]
+\begin{verbatim}
+\begin{enumerate}
+    \item 这里默认起始编号为1.
+\end{enumerate}
+\end{verbatim}
+\end{mdframed}
+
+项目编号，默认起始编号为(1)
+\begin{mdframed}[backgroundcolor=mycolor,hidealllines=true]
+\begin{verbatim}
+\begin{enumerate}[(1)]
+\item
+\end{enumerate}
+\end{verbatim}
+\end{mdframed}
+
+
+项目编号，默认起始编号为(a)
+\begin{mdframed}[backgroundcolor=mycolor,hidealllines=true]
+\begin{verbatim}
+\begin{enumerate}[(a)]
+\item
+\end{enumerate}
+\end{verbatim}
+\end{mdframed}
+
+
+项目编号，默认起始编号为指定数字：
+\begin{mdframed}[backgroundcolor=mycolor,hidealllines=true]
+\begin{verbatim}
+\begin{enumerate}
+\setcounter{enumi}{4}
+  \item 设置默认起始编号为5.
+\end{enumerate}
+\end{verbatim}
+\end{mdframed}
+
+
+\begin{table}[!hbp]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|}
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  项目1 & 2 & 3 & 4 & 5 & 6 & 7 \\ \hline
+  项目2 & 8 & 9 & 10 & 11 & 12 & 13 \\ \hline
+  项目3 & 一 & 二 & 三 & 四 & 五 & 六 \\ \hline
+\end{tabular}
+  \caption{表格名称}\label{表格标签}
+\end{table}
+如表\ref{表格标签}所示：
+
+
+\begin{mdframed}[backgroundcolor=mycolor,hidealllines=true]
+\begin{verbatim}
+\begin{table}[!hbp]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|}
+  \hline
+  % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+  项目1 & 2 & 3 & 4 & 5 & 6 & 7 \\ \hline
+  项目2 & 8 & 9 & 10 & 11 & 12 & 13 \\ \hline
+  项目3 & 一 & 二 & 三 & 四 & 五 & 六 \\ \hline
+\end{tabular}
+  \caption{表格名称}\label{表格标签}
+\end{table}
+如\ref{表格标签}所示：
+\end{verbatim}
+\end{mdframed}
+
+
+\end{document}
